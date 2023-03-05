@@ -34,12 +34,12 @@ public class Person {
         this.birthday = birthday;
     }
 
-    public ArrayList<String> getPerson(Person p) {
+    public ArrayList<String> getPerson() {
         ArrayList<String> person = new ArrayList<>();
-        person.add(p.name);
-        person.add(p.surname);
-        person.add(p.birthday);
-        if (p.dateOfDeath != null) person.add(p.dateOfDeath);
+        person.add(name);
+        person.add(surname);
+        person.add(birthday);
+        if (dateOfDeath != null) person.add(dateOfDeath);
         return person;
     }
 

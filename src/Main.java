@@ -16,8 +16,10 @@ public class Main {
         gt.appendBrother(oleg, irina);
         System.out.println(new Reserch(gt).spend(irina, Relationship.parent));
         System.out.println(new Reserch(gt).spend(irina, Relationship.sister));
+        System.out.println(new Reserch(gt).relative(irina));
+        System.out.println(new Reserch(gt).relativeLive(irina));
         
-        System.out.println(irina.getPerson(irina));
+        System.out.println(irina.getPerson());
     }
 
 }
