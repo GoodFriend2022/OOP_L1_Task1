@@ -2,5 +2,9 @@ public enum Relationship {
     parent,
     children,
     brother,
-    sister
+    sister,
+    grandma,
+    grandpa,
+    grandson,
+    granddauther
 }
