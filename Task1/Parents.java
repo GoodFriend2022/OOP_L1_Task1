@@ -4,4 +4,5 @@ public class Parents implements GeoTree {
         GeoTree.getTree().add(new Node(parent, Relationship.parent, children));
         GeoTree.getTree().add(new Node(children, Relationship.children, parent));
     }
+        
 }

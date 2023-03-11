@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public interface GeoTree {
-    ArrayList<Node> tree = new ArrayList<>();
+    HashSet<Node> tree = new HashSet<>();
 
-    static ArrayList<Node> getTree() {
+    static HashSet<Node> getTree() {
         return tree;
     }
 
