@@ -1,11 +1,11 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public interface GeoTree {
-    HashSet<Node> tree = new HashSet<>();
+    ArrayList<Node> tree = new ArrayList<>();
 
-    static HashSet<Node> getTree() {
+    static ArrayList<Node> getTree() {
         return tree;
     }
 
-    void append(Person person1, Person person2);
+    void kinship(Person person1, Person person2, Relationship relationship);
 }

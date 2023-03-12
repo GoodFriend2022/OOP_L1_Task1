@@ -43,4 +43,8 @@ public class Person {
         return person;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s %s г.р.", this.surname, this.name, this.birthday);
+    }
 }

@@ -19,8 +19,14 @@ public class Main {
         
         System.out.println(new Reserch().spend(irina, Relationship.parent));
         System.out.println(new Reserch().spend(irina, Relationship.sister));
-        System.out.println(String.join(" ", new Reserch().relative(irina)));
-        System.out.println(String.join(" ", new Reserch().relativeLive(irina)));
+        System.out.println(new Reserch().relative(irina, true));
+        System.out.println(new Reserch().relative(irina, false));
+
+        Reserch r = new Reserch();
+        r.findOldestAndYoungest(irina);
+
+
+
     }
 
 }

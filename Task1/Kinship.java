@@ -1,29 +1,41 @@
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Kinship {
+public class Kinship implements GeoTree {
 
+    @Override
     public void kinship(Person person1, Person person2, Relationship relationship) {
         if (relationship == Relationship.parent) {
-            Parents par = new Parents();
-            par.append(person1, person2);
-            HashSet<Node> cl = new HashSet<>();
-            cl.addAll(GeoTree.getTree());
-            for (Node t : cl) {
-                if (t.p1 == person2 && t.re == Relationship.parent) {
-                    Grandparents gp = new Grandparents();
-                    gp.append(person1, t.p2);
+            GeoTree.getTree().add(new Node(person1, relationship, person2));
+            GeoTree.getTree().add(new Node(person2, Relationship.children, person1));
+            ArrayList<Node> newList = new ArrayList<>();
+            newList.addAll(GeoTree.getTree());
+            Iterator<Node> ksh = newList.iterator();
+            while (ksh.hasNext()) {
+                Node n = ksh.next();
+                if (n.p1 == person2 && n.re == relationship) {
+                    if (person1.getGender() == "м") { GeoTree.getTree().add(new Node(person1, Relationship.grandpa, n.p2)); }
+                    else GeoTree.getTree().add(new Node(person1, Relationship.grandma, n.p2));
+                    if (n.p2.getGender() == "м") { GeoTree.getTree().add(new Node(n.p2, Relationship.grandson, person1)); }
+                    else GeoTree.getTree().add(new Node(n.p2, Relationship.granddauther, person1));
                 }
-                if (t.p1 == person1 && t.re == Relationship.parent && t.p2 != person2) {
-                    Sib s = new Sib();
-                    s.append(t.p2, person2);
+                if (n.p1 == person1 && n.re == relationship && n.p2 != person2) {
+                    if (n.p2.getGender() == "м") { GeoTree.getTree().add(new Node(n.p2, Relationship.brother, person2)); }
+                    else GeoTree.getTree().add(new Node(n.p2, Relationship.sister, person2));
+                    if (person2.getGender() == "м") { GeoTree.getTree().add(new Node(person2, Relationship.brother, n.p2)); }
+                    else GeoTree.getTree().add(new Node(person2, Relationship.sister, n.p2));
                 }
             }
         } else if (relationship == Relationship.grandma || relationship == Relationship.grandpa) {
-            Grandparents gp = new Grandparents();
-            gp.append(person1, person2);
+            if (person1.getGender() == "м") { GeoTree.getTree().add(new Node(person1, Relationship.grandpa, person2)); }
+            else GeoTree.getTree().add(new Node(person1, Relationship.grandma, person2));
+            if (person2.getGender() == "м") { GeoTree.getTree().add(new Node(person2, Relationship.grandson, person1)); }
+            else GeoTree.getTree().add(new Node(person2, Relationship.granddauther, person1));
         } else if (relationship == Relationship.brother || relationship == Relationship.sister) {
-            Sib sib = new Sib();
-            sib.append(person1, person2);
+            if (person1.getGender() == "м") { GeoTree.getTree().add(new Node(person1, Relationship.brother, person2)); }
+            else GeoTree.getTree().add(new Node(person1, Relationship.sister, person2));
+            if (person2.getGender() == "м") { GeoTree.getTree().add(new Node(person2, Relationship.brother, person1)); }
+            else GeoTree.getTree().add(new Node(person2, Relationship.sister, person1));
         }
     }
 }
